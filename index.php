@@ -4,7 +4,7 @@
 	<title>PriceCompareIndia - Compare computer part prices in india</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<meta content="description" content="A site for you to compare prices of computer parts in india from mdcomputers, vedantcompters and primeabgb and find the best price of the product.More Sites will be added soon.">
+	<meta name="description" content="A site for you to compare prices of computer parts in india from mdcomputers, vedantcompters and primeabgb and find the best price of the product.More Sites will be added soon.">
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>

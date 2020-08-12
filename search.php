@@ -91,7 +91,7 @@ array_multisort($price2,SORT_NUMERIC, $found2);
  	<title>Search - Compare part you have searched</title>
  	<meta name="viewport" content="width=device-width, initial-scale=1">
  	<meta charset="utf-8">
-	<meta content="description" content="See the result of the product you have searched for and find the best price">
+	<meta name="description" content="See the result of the product you have searched for and find the best price">
  	<link rel="stylesheet" type="text/css" href="style.css">
  </head>
  <body>
