@@ -1,0 +1,187 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline:none;
+}
+
+body {
+	transition: 0.5s;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+	transition: 0.5s;
+}
+
+a:hover {
+	border-bottom: 1px solid black;
+
+}
+
+#search{
+	margin-left: auto;
+	margin-right: auto; 
+}
+
+#search #searchBar {
+	width: 500px;
+	height: 30px;
+	padding-left: 10px;
+	border: 2px solid black;
+	font-family: arial;
+	font-weight: bold;
+
+}
+
+#search #searchBar:focus {
+	border:2px solid blue;
+}
+
+.navbar {
+	display: flex;
+	padding: 10px;
+	height: 50px;
+	position: fixed;
+	z-index: 1;
+	width: 100%;
+	box-shadow: 0px 8px 16px 0 rgba(0,0,0,0.2);
+	align-items: center;
+	margin-bottom: 50px;
+	background-color: white;
+	transition: 0.5s;
+}
+
+#about{
+	background-color: whitesmoke;
+	height: 100vh;
+	padding: 150px;
+	transition: 0.5s;
+}
+
+#about h1,
+#about p,
+#about div{
+	text-align: center;
+	padding: 10px;
+}
+
+.content {
+	padding: 50px 20px 0px 20px; 
+	display: flex;
+	flex-wrap: wrap;
+	transition: 0.5s background-color;
+}
+
+.content .card {
+	background-color: whitesmoke;
+	box-shadow: 0 8px 16px 0px rgba(0,0,0,0.2);
+	padding: 10px;
+	margin: 30px auto;
+	width: 30%;
+	transition: 0.5s background-color;
+}
+
+.title {
+	padding: 10px 0px;
+	font-size: 20px;
+	color: darkslategray;
+	font-family: arial;
+	font-weight: bold;
+}
+
+.card *,
+.card > * {
+	padding: 5px 0px;
+}
+
+.options {
+	padding: 50px 0 0 0;
+}
+
+button {
+	background: transparent;
+	border: none;
+	transition: 0.5s;
+	padding: 0px 5px;
+	margin: 0 5px;
+}
+
+button:hover{
+	border-bottom: 1px solid black;
+	cursor: pointer;
+	padding-bottom: 2px;
+}
+
+
+body.dark-mode{
+	background-color: #333;
+}
+
+#about.dark-mode{
+	background-color: #333;
+	color: white;
+}
+
+.navbar.dark-mode{
+	background-color: #444;
+}
+
+.navbar.dark-mode a{
+	color: white;
+	transition: 0.5s;
+}
+
+.navbar.dark-mode a:hover{
+	border-bottom:1px solid white;
+}
+
+.content.dark-mode{
+	background-color: #333;
+	color: white;
+}
+
+.card.dark-mode{
+	background-color: #222;
+}
+
+.card.dark-mode .title{
+	color: slategray;
+}
+
+button.dark-mode,
+.button.dark-mode{
+	color: white;
+}
+
+button.dark-mode:hover,
+.button.dark-mode:hover{
+	border-bottom: 1px solid white;
+	padding-bottom: 1px;
+}
+
+.content.row{
+	flex-direction: column;
+}
+
+.card.row{
+	width: 100%;
+}
+
+@media(max-width: 700px) and (min-width: 400px){
+	.content .card {
+	width: 45%;
+	}
+
+	.card.row{
+		width: 100%;
+	}
+}
+
+@media(max-width: 399px) {
+	.content .card{
+		width: 95%;
+	}
+
+}
