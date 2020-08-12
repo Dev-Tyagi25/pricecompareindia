@@ -25,7 +25,7 @@ while($rec = fgetcsv($fh)){
 	}
 	if($c === sizeof($search)){
 		array_push($found, $rec[6]);
-		array_push($price, ltrim($rec[7],'₹'));
+		array_push($price, ltrim(str_replace(",", "", $rec[7]),'₹ ,'));
 	}
 }
 
@@ -47,7 +47,7 @@ while($rec = fgetcsv($fh)){
 	}
 	if($c === sizeof($search)){
 		array_push($found1, $rec[2]);
-		array_push($price1, ltrim($rec[3],'₹'));
+		array_push($price1, ltrim(str_replace(",", "", $rec[3]),"₹"));
 	}
 }
 
@@ -71,7 +71,7 @@ while($rec = fgetcsv($fh)){
 	if($c === sizeof($search)){
 		if(ltrim($rec[5]) != "null"){
 			array_push($found2, $rec[4]);
-			array_push($price2, ltrim($rec[5],'₹'));
+			array_push($price2, ltrim(str_replace(",", "", $rec[5]),'₹'));
 		}
 	}
 }
