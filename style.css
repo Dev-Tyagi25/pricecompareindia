@@ -26,7 +26,7 @@ a:hover {
 }
 
 #search #searchBar {
-	width: 500px;
+	width: 400px;
 	height: 30px;
 	padding-left: 10px;
 	border: 2px solid black;
@@ -51,6 +51,18 @@ a:hover {
 	margin-bottom: 50px;
 	background-color: white;
 	transition: 0.5s;
+}
+
+#bottomnavbar{
+	position: fixed;
+	bottom: 0;
+	box-shadow: 0px -8px 16px 0 rgba(0,0,0,0.2);
+	margin-bottom: 0px;
+	display: none;
+}
+
+#bottomnavbar > button:nth-of-type(1){
+	margin-left: auto;
 }
 
 #about{
@@ -169,6 +181,7 @@ button.dark-mode:hover,
 	width: 100%;
 }
 
+
 @media(max-width: 700px) and (min-width: 400px){
 	.content .card {
 	width: 45%;
@@ -177,11 +190,31 @@ button.dark-mode:hover,
 	.card.row{
 		width: 100%;
 	}
+
+	.card:nth-of-type(3){
+		width: 95%;
+	}
+
+	#up,#up2,#up3,#darkmode{
+		display: none;
+	}
+
+	#bottomnavbar{
+		display: flex;
+	}
+
+	#about{
+		padding: 150px 50px;
+	}
 }
 
-@media(max-width: 399px) {
+@media(max-width: 414px) {
 	.content .card{
 		width: 95%;
+	}
+
+	#about{
+		padding: 150px 0px 0px 0px;
 	}
 
 }

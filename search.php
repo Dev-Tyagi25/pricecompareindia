@@ -101,24 +101,40 @@ array_multisort($price2,SORT_NUMERIC, $found2);
 		   		if(sessionStorage.getItem("dark-mode") == "enabled"){
 					body.classList.add("dark-mode");
 					navbar[0].classList.add("dark-mode");
+					navbar[1].classList.add("dark-mode");
 					content[0].classList.add("dark-mode");
+					
 					card[0].classList.add("dark-mode");
 					card[1].classList.add("dark-mode");
 					card[2].classList.add("dark-mode");
+					
 					button[0].classList.add("dark-mode");
 					button[1].classList.add("dark-mode");
 					button[1].innerHTML = "Light Mode";
+					
+					button[2].classList.add("dark-mode");
+					button[3].classList.add("dark-mode");
+					
+					button[3].innerHTML = "Light Mode";
 				}
 				else{
 					body.classList.remove("dark-mode");
 					navbar[0].classList.remove("dark-mode");
+					navbar[1].classList.remove("dark-mode");
+		
 					content[0].classList.remove("dark-mode");
+					
 					card[0].classList.remove("dark-mode");
 					card[1].classList.remove("dark-mode");
 					card[2].classList.remove("dark-mode");
+					
 					button[0].classList.remove("dark-mode");
 					button[1].classList.remove("dark-mode");
 					button[1].innerHTML = "Dark Mode";
+					
+					button[2].classList.remove("dark-mode");
+					button[3].classList.remove("dark-mode");
+					button[3].innerHTML = "Dark Mode";
 				}
 
 				if(sessionStorage.getItem("layout") == "row"){
@@ -137,12 +153,12 @@ array_multisort($price2,SORT_NUMERIC, $found2);
 		// }
 	</script>
  <div class="navbar">
-		<a href="index.php">Home</a>
+		<a href="index.php" id="up">Home</a>
 		<form id="search" action="search.php" method="GET">
 			<input type="text" name="search" id="searchBar" placeholder="Search...." value="<?php echo $term; ?>">	
 		</form>
-		<button onclick="changeLayout()" class="button">Change Layout</button>
-		<button onclick="darkmode()" class="button">dark-mode</button>
+		<button onclick="changeLayout()" class="button" id="up2">Change Layout</button>
+		<button onclick="darkmode()" class="button" id="up3">dark-mode</button>
 </div>
 <div class="content">
 		<div class="card">
@@ -163,6 +179,12 @@ array_multisort($price2,SORT_NUMERIC, $found2);
 		<?php for($i = 0;$i < count($found2); $i++){echo(nl2br("<div>$found2[$i]</div><div> ₹$price2[$i]</div>"));} ?>
 	</div>
 </div>
+<div id="bottomnavbar" class="navbar">
+	<a href="index.php">Home</a>
+	<button onclick="changeLayout()" class="button">Change Layout</button>
+	<button onclick="darkmode()" class="button">dark-mode</button>
+</div>
+
 <script type="text/javascript">
 	function darkmode(){
 		var body = document.body;
@@ -173,6 +195,7 @@ array_multisort($price2,SORT_NUMERIC, $found2);
 
 		body.classList.toggle("dark-mode");
 		navbar[0].classList.toggle("dark-mode");
+		navbar[1].classList.toggle("dark-mode");	
 		content[0].classList.toggle("dark-mode");
 		card[0].classList.toggle("dark-mode");
 		card[1].classList.toggle("dark-mode");
@@ -183,12 +206,19 @@ array_multisort($price2,SORT_NUMERIC, $found2);
 			button[0].classList.add("dark-mode");
 			button[1].classList.add("dark-mode");
 			button[1].innerHTML = "Light Mode";
+			button[2].classList.add("dark-mode");
+			button[3].classList.add("dark-mode");
+			
+			button[3].innerHTML = "Light Mode";
 		}
 		else{
 			sessionStorage.setItem("dark-mode","disabled");
 			button[0].classList.remove("dark-mode");
 			button[1].classList.remove("dark-mode");
 			button[1].innerHTML = "Dark Mode";
+			button[2].classList.remove("dark-mode");
+			button[3].classList.remove("dark-mode");
+			button[3].innerHTML = "Dark Mode";
 		}
 	}
 
