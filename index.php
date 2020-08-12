@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>priceCompareIndia</title>
+	<title>PriceCompareIndia - Compare computer part prices in india</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta content="description" content="A site for you to compare prices of computer parts in india from mdcomputers, vedantcompters and primeabgb and find the best price of the product.More Sites will be added soon.">
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -12,9 +14,9 @@
 				var navbar = document.getElementsByClassName("navbar");
 				var darkmodeButton = document.getElementById("darkmode");
 				var button = document.getElementsByClassName("button");
-				console.log(sessionStorage.getItem("dark-mode"));
+				console.log(localStorage.getItem("dark-mode"));
 		   		
-		   		if(sessionStorage.getItem("dark-mode") == "enabled"){	
+		   		if(localStorage.getItem("dark-mode") == "enabled"){	
 					about.classList.add("dark-mode");
 					navbar[0].classList.add("dark-mode");
 					navbar[1].classList.add("dark-mode");
@@ -61,14 +63,14 @@
 			navbar[1].classList.toggle("dark-mode");
 
 			if(navbar[0].classList.contains("dark-mode")){
-				sessionStorage.setItem("dark-mode","enabled");
+				localStorage.setItem("dark-mode","enabled");
 				darkmodeButton.innerHTML = "Light Mode";
 				darkmodeButton.classList.add("dark-mode");
 				button[0].innerHTML = "Light Mode";
 				button[0].classList.add("dark-mode");
 			}
 			else{
-				sessionStorage.setItem("dark-mode","disabled");
+				localStorage.setItem("dark-mode","disabled");
 				darkmodeButton.innerHTML = "Dark Mode";
 				darkmodeButton.classList.remove("dark-mode");
 				button[0].innerHTML = "Dark Mode";

@@ -2,6 +2,10 @@
 
 $term = $_GET["search"];
 
+if(!isset($_GET["search"]) || $term == ""){
+	header("location: index.php");
+}
+
 $mdcomputer = "./data/mdcomputer.csv";
 $fh = fopen($mdcomputer,'r') 
  or die('Error occurred when open the file ' . $mdcomputer );
@@ -65,8 +69,10 @@ while($rec = fgetcsv($fh)){
 		}	
 	}
 	if($c === sizeof($search)){
-		array_push($found2, $rec[4]);
-		array_push($price2, ltrim($rec[5],'₹'));
+		if(ltrim($rec[5]) != "null"){
+			array_push($found2, $rec[4]);
+			array_push($price2, ltrim($rec[5],'₹'));
+		}
 	}
 }
 
@@ -82,8 +88,10 @@ array_multisort($price2,SORT_NUMERIC, $found2);
  <!DOCTYPE html>
  <html>
  <head>
- 	<title>comparePriceIndia</title>
+ 	<title>Search - Compare part you have searched</title>
  	<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<meta charset="utf-8">
+	<meta content="description" content="See the result of the product you have searched for and find the best price">
  	<link rel="stylesheet" type="text/css" href="style.css">
  </head>
  <body>
@@ -96,9 +104,9 @@ array_multisort($price2,SORT_NUMERIC, $found2);
 				var card = document.getElementsByClassName("card");
 				var button = document.getElementsByClassName("button");
 
-				console.log(sessionStorage.getItem("dark-mode"));
+				console.log(localStorage.getItem("dark-mode"));
 		   		
-		   		if(sessionStorage.getItem("dark-mode") == "enabled"){
+		   		if(localStorage.getItem("dark-mode") == "enabled"){
 					body.classList.add("dark-mode");
 					navbar[0].classList.add("dark-mode");
 					navbar[1].classList.add("dark-mode");
@@ -137,7 +145,7 @@ array_multisort($price2,SORT_NUMERIC, $found2);
 					button[3].innerHTML = "Dark Mode";
 				}
 
-				if(sessionStorage.getItem("layout") == "row"){
+				if(localStorage.getItem("layout") == "row"){
 					content[0].classList.add("row");
 					card[0].classList.add("row");
 					card[1].classList.add("row");
@@ -202,7 +210,7 @@ array_multisort($price2,SORT_NUMERIC, $found2);
 		card[2].classList.toggle("dark-mode");
 
 		if(navbar[0].classList.contains("dark-mode")){
-			sessionStorage.setItem("dark-mode","enabled");
+			localStorage.setItem("dark-mode","enabled");
 			button[0].classList.add("dark-mode");
 			button[1].classList.add("dark-mode");
 			button[1].innerHTML = "Light Mode";
@@ -212,7 +220,7 @@ array_multisort($price2,SORT_NUMERIC, $found2);
 			button[3].innerHTML = "Light Mode";
 		}
 		else{
-			sessionStorage.setItem("dark-mode","disabled");
+			localStorage.setItem("dark-mode","disabled");
 			button[0].classList.remove("dark-mode");
 			button[1].classList.remove("dark-mode");
 			button[1].innerHTML = "Dark Mode";
@@ -231,14 +239,14 @@ array_multisort($price2,SORT_NUMERIC, $found2);
 			card[0].classList.remove("row");
 			card[1].classList.remove("row");
 			card[2].classList.remove("row");
-			sessionStorage.setItem("layout","column");
+			localStorage.setItem("layout","column");
 		}
 		else{
 			content[0].classList.add("row");
 			card[0].classList.add("row");
 			card[1].classList.add("row");
 			card[2].classList.add("row");
-			sessionStorage.setItem("layout","row");
+			localStorage.setItem("layout","row");
 		}
 	}
 </script>
