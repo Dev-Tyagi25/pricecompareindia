@@ -182,7 +182,7 @@ button.dark-mode:hover,
 }
 
 
-@media(max-width: 700px) and (min-width: 400px){
+@media(max-width: 700px) and (min-width: 414px){
 	.content .card {
 	width: 45%;
 	}
@@ -211,6 +211,14 @@ button.dark-mode:hover,
 @media(max-width: 414px) {
 	.content .card{
 		width: 95%;
+	}
+
+	#up,#up2,#up3,#darkmode{
+		display: none;
+	}
+
+	#bottomnavbar{
+		display: flex;
 	}
 
 	#about{
