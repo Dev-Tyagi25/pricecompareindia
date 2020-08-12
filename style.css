@@ -218,6 +218,10 @@ button.dark-mode:hover,
 		display: none;
 	}
 
+	#search #searchBar {
+		width: 300px;
+	}
+
 	.card:nth-of-type(3){
 		margin-bottom: 60px;
 	}
