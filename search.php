@@ -58,6 +58,7 @@ $fh = fopen($primeabgb,'r')
 
 $found2 = array();
 $price2 = array();
+$instock = array();
 while($rec = fgetcsv($fh)){
 	$c=0;
 	for ($i=0; $i < sizeof($search) ; $i++) { 
@@ -76,6 +77,12 @@ while($rec = fgetcsv($fh)){
 			if(count($primeabgbproduct) == 2){
 				$rec[5] = explode(" ", $rec[5])[1];
 			}
+			if(strtolower($rec[6]) == "sold out" ){
+				array_push($instock, "Sold Out");
+			}
+			else{
+				array_push($instock, "");
+			}
 			array_push($found2, $rec[4]);
 			array_push($price2, $rec[5]);
 		}
@@ -84,7 +91,7 @@ while($rec = fgetcsv($fh)){
 
 array_multisort($price, SORT_NUMERIC, $found);
 array_multisort($price1,SORT_NUMERIC, $found1);
-array_multisort($price2,SORT_NUMERIC, $found2);
+array_multisort($price2,SORT_NUMERIC, $found2, $instock);
 
  ?>
 
@@ -187,7 +194,7 @@ array_multisort($price2,SORT_NUMERIC, $found2);
 		<div class="card"><a href="https://www.primeabgb.com/" target="_blank">
 			<div class="title">PrimeABGB</div>
 		</a>
-		<?php for($i = 0;$i < count($found2); $i++){echo(nl2br("<div>$found2[$i]</div><div> ₹$price2[$i]</div>"));} ?>
+		<?php for($i = 0;$i < count($found2); $i++){echo(nl2br("<div>$found2[$i]</div><div> ₹$price2[$i] $instock[$i]</div>"));} ?>
 	</div>
 </div>
 <div id="bottomnavbar" class="navbar">
