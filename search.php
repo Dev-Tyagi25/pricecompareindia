@@ -1,7 +1,7 @@
 <?php 
 
 $term = $_GET["search"];
-
+$term = strtolower($term);
 if(!isset($_GET["search"]) || $term == ""){
 	header("location: index.php");
 }
@@ -16,12 +16,12 @@ $search = explode(" ", $term);
 while($rec = fgetcsv($fh)){
 	$c=0;
 	for ($i=0; $i < sizeof($search) ; $i++) { 
-		// if(strpos(strtolower($rec[6]), $search[$i]) !== false){
-		// 	$c++;
-		// }
-		if(preg_match("/{$search[$i]}/i", $rec[6])){
+		if(strpos(strtolower($rec[6]), $search[$i]) !== false){
 			$c++;
-		}	
+		}
+		// if(preg_match("/{$search[$i]}/i", $rec[6])){
+		// 	$c++;
+		// }	
 	}
 	if($c === sizeof($search)){
 		array_push($found, $rec[6]);
@@ -38,12 +38,12 @@ $price1 = array();
 while($rec = fgetcsv($fh)){
 	$c=0;
 	for ($i=0; $i < sizeof($search) ; $i++) { 
-		// if(strpos(strtolower($rec[6]), $search[$i]) !== false){
-		// 	$c++;
-		// }
-		if(preg_match("/{$search[$i]}/i", $rec[2])){
+		if(strpos(strtolower($rec[2]), $search[$i]) !== false){
 			$c++;
-		}	
+		}
+		// if(preg_match("/{$search[$i]}/i", $rec[2])){
+		// 	$c++;
+		// }	
 	}
 	if($c === sizeof($search)){
 		array_push($found1, $rec[2]);
@@ -61,24 +61,27 @@ $price2 = array();
 while($rec = fgetcsv($fh)){
 	$c=0;
 	for ($i=0; $i < sizeof($search) ; $i++) { 
-		// if(strpos(strtolower($rec[6]), $search[$i]) !== false){
-		// 	$c++;
-		// }
-		if(preg_match("/{$search[$i]}/i", $rec[4])){
+		if(strpos(strtolower($rec[4]), $search[$i]) !== false){
 			$c++;
-		}	
+		}
+		// if(preg_match("/{$search[$i]}/i", $rec[4])){
+		// 	$c++;
+		// }	
 	}
 	if($c === sizeof($search)){
-		if(ltrim($rec[5]) != "null"){
+		$rec[5] =  str_replace(",", "", $rec[5]);
+		$rec[5] = str_replace("₹", "", $rec[5]);
+		if($rec[5] != "Call for Price"){
+			$primeabgbproduct = explode(" ", $rec[5]);
+			if(count($primeabgbproduct) == 2){
+				$rec[5] = explode(" ", $rec[5])[1];
+			}
 			array_push($found2, $rec[4]);
-			array_push($price2, ltrim(str_replace(",", "", $rec[5]),'₹'));
+			array_push($price2, $rec[5]);
 		}
 	}
 }
 
-// arsort($found);
-// arsort($found1);
-// arsort($found2);
 array_multisort($price, SORT_NUMERIC, $found);
 array_multisort($price1,SORT_NUMERIC, $found1);
 array_multisort($price2,SORT_NUMERIC, $found2);
