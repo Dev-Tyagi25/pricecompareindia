@@ -162,6 +162,10 @@ body.dark-mode{
 	color: slategray;
 }
 
+.card.dark-mode .link{
+	color: white;
+}
+
 button.dark-mode,
 .button.dark-mode{
 	color: white;
@@ -177,14 +181,23 @@ button.dark-mode:hover,
 	flex-direction: column;
 }
 
+.card:nth-of-type(4){
+	width: 47%;
+}
+
+.card:nth-of-type(5){
+	width: 47%;
+}
+
 .card.row{
 	width: 100%;
 }
 
 
+
 @media(max-width: 700px) and (min-width: 414px){
 	.content .card {
-	width: 45%;
+	width: 47%;
 	}
 
 	.card.row{
@@ -192,7 +205,12 @@ button.dark-mode:hover,
 	}
 
 	.card:nth-of-type(3){
-		width: 95%;
+		width: 47%;
+		padding-bottom: 20px;
+	}
+
+	.card:nth-of-type(5){
+		width: 97%;
 		padding-bottom: 20px;
 	}
 
@@ -222,7 +240,7 @@ button.dark-mode:hover,
 		width: 300px;
 	}
 
-	.card:nth-of-type(3){
+	.card:nth-of-type(5){
 		margin-bottom: 60px;
 	}
 

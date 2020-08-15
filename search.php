@@ -12,6 +12,8 @@ $fh = fopen($mdcomputer,'r')
  
 $found = array();
 $price = array();
+$link = array();
+$instock = array();
 $search = explode(" ", $term);
 while($rec = fgetcsv($fh)){
 	$c=0;
@@ -26,8 +28,16 @@ while($rec = fgetcsv($fh)){
 	if($c === sizeof($search)){
 		array_push($found, $rec[6]);
 		array_push($price, ltrim(str_replace(",", "", $rec[7]),'₹ ,'));
+		array_push($link, $rec[9]);
+		if($rec[9] == "Out Of Stock"){
+			array_push($instock, "Sold Out");
+		}
+		else{
+			array_push($instock, "");
+		}
 	}
 }
+
 
 $vedantcomputer = "./data/vedantcomputer.csv";
 $fh = fopen($vedantcomputer,'r') 
@@ -35,6 +45,8 @@ $fh = fopen($vedantcomputer,'r')
  
 $found1 = array();
 $price1 = array();
+$instock1 = array();
+$link1 = array();
 while($rec = fgetcsv($fh)){
 	$c=0;
 	for ($i=0; $i < sizeof($search) ; $i++) { 
@@ -46,8 +58,17 @@ while($rec = fgetcsv($fh)){
 		// }	
 	}
 	if($c === sizeof($search)){
-		array_push($found1, $rec[2]);
-		array_push($price1, ltrim(str_replace(",", "", $rec[3]),"₹"));
+		if($rec[5] != "null"){
+			array_push($link1, $rec[6]);
+			array_push($found1, $rec[2]);
+			array_push($price1, ltrim(str_replace(",", "", $rec[3]),"₹"));
+			if($rec[4] == "Out Of Stock"){
+				array_push($instock1, "Sold Out");
+			}
+			else{
+				array_push($instock1, "");
+			}
+		}
 	}
 }
 
@@ -58,7 +79,8 @@ $fh = fopen($primeabgb,'r')
 
 $found2 = array();
 $price2 = array();
-$instock = array();
+$instock2 = array();
+$link2 = array();
 while($rec = fgetcsv($fh)){
 	$c=0;
 	for ($i=0; $i < sizeof($search) ; $i++) { 
@@ -78,20 +100,81 @@ while($rec = fgetcsv($fh)){
 				$rec[5] = explode(" ", $rec[5])[1];
 			}
 			if(strtolower($rec[6]) == "sold out" ){
-				array_push($instock, "Sold Out");
+				array_push($instock2, "Sold Out");
 			}
 			else{
-				array_push($instock, "");
+				array_push($instock2, "");
 			}
 			array_push($found2, $rec[4]);
 			array_push($price2, $rec[5]);
+			array_push($link2, $rec[8]);
 		}
 	}
 }
 
-array_multisort($price, SORT_NUMERIC, $found);
-array_multisort($price1,SORT_NUMERIC, $found1);
-array_multisort($price2,SORT_NUMERIC, $found2, $instock);
+$pcstudio = "./data/pcstudio.csv";
+$fh = fopen($pcstudio,'r') 
+ or die('Error occurred when open the file ' . $pcstudio );
+ 
+$found3 = array();
+$price3 = array();
+$link3 = array();
+$instock3 = array();
+$search = explode(" ", $term);
+while($rec = fgetcsv($fh)){
+	$c=0;
+	for ($i=0; $i < sizeof($search) ; $i++) { 
+		if(strpos(strtolower($rec[4]), $search[$i]) !== false){
+			$c++;
+		}
+		// if(preg_match("/{$search[$i]}/i", $rec[6])){
+		// 	$c++;
+		// }	
+	}
+	if($c === sizeof($search)){
+		array_push($found3, $rec[4]);
+		array_push($price3, ltrim(str_replace(",", "", $rec[5]),'₹ ,'));
+		array_push($link3, $rec[7]);
+		if($rec[8] == "Read more"){
+			array_push($instock3, "Sold Out");
+		}
+		else{
+			array_push($instock3, "");
+		}
+	}
+}
+
+$bitfang = "./data/bitfang.csv";
+$fh = fopen($bitfang,'r') 
+ or die('Error occurred when open the file ' . $bitfang );
+ 
+$found4 = array();
+$price4 = array();
+$link4 = array();
+$search = explode(" ", $term);
+while($rec = fgetcsv($fh)){
+	$c=0;
+	for ($i=0; $i < sizeof($search) ; $i++) { 
+		if(strpos(strtolower($rec[2]), $search[$i]) !== false){
+			$c++;
+		}
+		// if(preg_match("/{$search[$i]}/i", $rec[6])){
+		// 	$c++;
+		// }	
+	}
+	if($c === sizeof($search)){
+		array_push($found4, $rec[2]);
+		array_push($price4, ltrim(str_replace(",", "", $rec[3]),'₹ ,'));
+		array_push($link4, $rec[4]);
+	}
+}
+
+
+array_multisort($price, SORT_NUMERIC, $found, $instock, $link);
+array_multisort($price1,SORT_NUMERIC, $found1, $instock1, $link1);
+array_multisort($price2,SORT_NUMERIC, $found2, $instock2, $link2);
+array_multisort($price3, SORT_NUMERIC, $found3, $instock3, $link3);
+array_multisort($price4, SORT_NUMERIC, $found4, $link4);
 
  ?>
 
@@ -125,6 +208,8 @@ array_multisort($price2,SORT_NUMERIC, $found2, $instock);
 					card[0].classList.add("dark-mode");
 					card[1].classList.add("dark-mode");
 					card[2].classList.add("dark-mode");
+					card[3].classList.add("dark-mode");
+					card[4].classList.add("dark-mode");
 					
 					button[0].classList.add("dark-mode");
 					button[1].classList.add("dark-mode");
@@ -145,6 +230,8 @@ array_multisort($price2,SORT_NUMERIC, $found2, $instock);
 					card[0].classList.remove("dark-mode");
 					card[1].classList.remove("dark-mode");
 					card[2].classList.remove("dark-mode");
+					card[3].classList.remove("dark-mode");
+					card[4].classList.remove("dark-mode");
 					
 					button[0].classList.remove("dark-mode");
 					button[1].classList.remove("dark-mode");
@@ -160,12 +247,18 @@ array_multisort($price2,SORT_NUMERIC, $found2, $instock);
 					card[0].classList.add("row");
 					card[1].classList.add("row");
 					card[2].classList.add("row");
+					card[3].classList.add("row");
+					card[4].classList.add("row");
+					
 				}
 				else{
 					content[0].classList.remove("row");
 					card[0].classList.remove("row");
 					card[1].classList.remove("row");
 					card[2].classList.remove("row");
+					card[3].classList.remove("row");
+					card[4].classList.remove("row");
+					
 				}
 			});
 		// }
@@ -183,19 +276,29 @@ array_multisort($price2,SORT_NUMERIC, $found2, $instock);
 			<a href="https://mdcomputers.in" target="_blank">
 				<div class="title">MDComputer</div>
 			</a>
-			<?php for($i = 0;$i < count($found); $i++){echo(nl2br("<div>$found[$i]</div><div> ₹$price[$i]</div>"));} ?>
+			<?php for($i = 0;$i < count($found); $i++){echo(nl2br("<a href='$link[$i]' class='link'><div>$found[$i]</div></a><div> ₹$price[$i] $instock[$i]</div>"));} ?>
 		</div>
 		<div class="card">
 			<a href="https://vedantcomputers.com" target="_blank">
 				<div class="title">VedantComputer</div>
 			</a>
-			<?php for($i = 0;$i < count($found1); $i++){echo(nl2br("<div>$found1[$i]</div><div> ₹$price1[$i]</div>"));} ?>
+			<?php for($i = 0;$i < count($found1); $i++){echo(nl2br("<a href='$link1[$i]' class='link'><div>$found1[$i]</div></a><div> ₹$price1[$i] $instock1[$i]</div>"));} ?>
 		</div>
 		<div class="card"><a href="https://www.primeabgb.com/" target="_blank">
 			<div class="title">PrimeABGB</div>
 		</a>
-		<?php for($i = 0;$i < count($found2); $i++){echo(nl2br("<div>$found2[$i]</div><div> ₹$price2[$i] $instock[$i]</div>"));} ?>
-	</div>
+		<?php for($i = 0;$i < count($found2); $i++){echo(nl2br("<a href='$link2[$i]' class='link'><div>$found2[$i]</div></a><div> ₹$price2[$i] $instock[$i]</div>"));} ?>
+		</div>
+		<div class="card"><a href="https://www.pcstudio.in/" target="_blank">
+			<div class="title">PcStudio</div>
+		</a>
+		<?php for($i = 0;$i < count($found3); $i++){echo(nl2br("<a href='$link3[$i]' class='link'><div>$found3[$i]</div></a><div> ₹$price3[$i] $instock3[$i]</div>"));} ?>
+		</div>
+		<div class="card"><a href="https://www.bitfang.com/" target="_blank">
+			<div class="title">BitFang</div>
+		</a>
+		<?php for($i = 0;$i < count($found4); $i++){echo(nl2br("<a href='$link4[$i]' class='link'><div>$found4[$i]</div></a><div> ₹$price4[$i] </div>"));} ?>
+		</div>
 </div>
 <div id="bottomnavbar" class="navbar">
 	<a href="index.php">Home</a>
@@ -218,6 +321,9 @@ array_multisort($price2,SORT_NUMERIC, $found2, $instock);
 		card[0].classList.toggle("dark-mode");
 		card[1].classList.toggle("dark-mode");
 		card[2].classList.toggle("dark-mode");
+		card[3].classList.toggle("dark-mode");		
+		card[4].classList.toggle("dark-mode");
+					
 
 		if(navbar[0].classList.contains("dark-mode")){
 			localStorage.setItem("dark-mode","enabled");
@@ -249,6 +355,7 @@ array_multisort($price2,SORT_NUMERIC, $found2, $instock);
 			card[0].classList.remove("row");
 			card[1].classList.remove("row");
 			card[2].classList.remove("row");
+			card[3].classList.remove("row");
 			localStorage.setItem("layout","column");
 		}
 		else{
@@ -256,6 +363,9 @@ array_multisort($price2,SORT_NUMERIC, $found2, $instock);
 			card[0].classList.add("row");
 			card[1].classList.add("row");
 			card[2].classList.add("row");
+			card[3].classList.add("row");
+			card[4].classList.add("row");
+					
 			localStorage.setItem("layout","row");
 		}
 	}
