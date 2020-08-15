@@ -356,6 +356,7 @@ array_multisort($price4, SORT_NUMERIC, $found4, $link4);
 			card[1].classList.remove("row");
 			card[2].classList.remove("row");
 			card[3].classList.remove("row");
+			card[4].classList.remove("row");
 			localStorage.setItem("layout","column");
 		}
 		else{
