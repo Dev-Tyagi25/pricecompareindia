@@ -287,7 +287,7 @@ array_multisort($price4, SORT_NUMERIC, $found4, $link4);
 		<div class="card"><a href="https://www.primeabgb.com/" target="_blank">
 			<div class="title">PrimeABGB</div>
 		</a>
-		<?php for($i = 0;$i < count($found2); $i++){echo(nl2br("<a href='$link2[$i]' class='link'><div>$found2[$i]</div></a><div> ₹$price2[$i] $instock[$i]</div>"));} ?>
+		<?php for($i = 0;$i < count($found2); $i++){echo(nl2br("<a href='$link2[$i]' class='link'><div>$found2[$i]</div></a><div> ₹$price2[$i] $instock2[$i]</div>"));} ?>
 		</div>
 		<div class="card"><a href="https://www.pcstudio.in/" target="_blank">
 			<div class="title">PcStudio</div>
